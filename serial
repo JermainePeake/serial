@@ -1,0 +1,105 @@
+#read from a file and extract a specific word from it
+
+
+#Write a Python program to extract characters from various text files and
+#puts them into a list
+def extract(file,char):
+    f = open(file)
+    f.rfind(char)
+print(extract('fileplay.txt','e'))
+#lambda exercise
+#exception hierarchy exercise
+
+f = open('fileplay.txt','w')
+f.append('indian fart shit')
+f.close()
+
+# Open the file in "a" mode to append data to it
+with open('your_file.txt', 'a') as file:
+    file.write('indian fart shit\n')
+
+
+
+def extract(filename, char):
+    with open('fileplay.txt', 'r') as file:
+        content = file.read()
+    
+    last_index = content.rfind(char)
+    return str(last_index)
+
+print(extract('fileplay.txt', 'e'))
+
+
+def extract(filename, char):
+    with open(filename, 'r') as file:
+        content = file.read()
+    
+    last_index = content.rfind(char)
+    return last_index
+
+print(extract('fileplay.txt', 'e'))
+
+def extract(filename, char):
+    with open(filename, 'r') as file:
+        content = file.read()
+        fin = content.rfind(char)
+        return fin
+
+print(extract('fileplay.txt', 'serial'))
+
+
+
+
+
+
+
+def extract(filename, char):
+    with open(filename, 'r') as file:
+        if 
+
+print(extract('fileplay.txt', 'serial'))
+
+
+with open('fileplay.txt', 'r') as file:
+    content = file.read()
+    serial = 'serial'
+    if serial in content:
+        print(serial[1])
+    else:
+        print('no')
+    
+#I verified that a specific word 
+'''
+import os
+import shutil
+def extract(filename):
+    with open(filename, 'r') as file:#open file
+        content = file.read()#read from it
+        ind = content.find('serial')#find serial #
+            x = content.index(ind)#possibly have to find its index to get the actual serial #
+            ser = content[x:64])
+        else:
+            print('no')
+extract(r'eraserreport.pdf.html?')
+#now to move it into an excel spreadsheet
+#x would contain the actual serial number
+#I should keep in mind that I need to find more than just a serial number but for now im
+#tryna focus on one thing at a time
+
+def transfer(spreadsheet):
+    
+    x.shutil.move(spreadsheet)
+
+    src = os.path(filename, spreadsheet)
+    dest = os.path(spreadsheet)
+    
+transfer(r'excel.xml')
+
+
+
+
+    
+#i need to take the serial number and move it into a specifc cell in the spreadsheet
+#practicing with an actual spreadsheet is proving to be more involved than I thought
+#I have to either buy microsoft 365 or go through some lengthy process for google
+#sheets.
