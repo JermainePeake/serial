@@ -103,3 +103,535 @@ transfer(r'excel.xml')
 #practicing with an actual spreadsheet is proving to be more involved than I thought
 #I have to either buy microsoft 365 or go through some lengthy process for google
 #sheets.
+
+'''
+""" Python Character Mapping Codec cp1252 generated from 'MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1252.TXT' with gencodec.py.
+
+"""#"
+
+import codecs
+
+### Codec APIs
+
+class Codec(codecs.Codec):
+
+    def encode(self,input,errors='strict'):
+        return codecs.charmap_encode(input,errors,encoding_table)
+
+    def decode(self,input,errors='strict'):
+        return codecs.charmap_decode(input,errors,decoding_table)
+
+class IncrementalEncoder(codecs.IncrementalEncoder):
+    def encode(self, input, final=False):
+        return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+
+class IncrementalDecoder(codecs.IncrementalDecoder):
+    def decode(self, input, final=False):
+        return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+
+class StreamWriter(Codec,codecs.StreamWriter):
+    pass
+
+class StreamReader(Codec,codecs.StreamReader):
+    pass
+
+### encodings module API
+
+def getregentry():
+    return codecs.CodecInfo(
+        name='cp1252',
+        encode=Codec().encode,
+        decode=Codec().decode,
+        incrementalencoder=IncrementalEncoder,
+        incrementaldecoder=IncrementalDecoder,
+        streamreader=StreamReader,
+        streamwriter=StreamWriter,
+    )
+
+
+### Decoding Table
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#openpyxl
+
+'''
+import os
+import shutil
+def extract(filename,dk):
+    with open(filename, 'r') as file:#open file
+        content = file.read()#read from it
+        ind = content.find('serial')#find serial #
+        x = content.index(ind)#possibly have to find its index to get the actual serial #
+        ser = content[x:64]
+extract(r'C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11/testdata.txt', 'r')
+#now to move it into an excel spreadsheet
+###actually I think ser would be the serial
+#x would contain the actual serial number
+#I should keep in mind that I need to find more than just a serial number but for now im
+#tryna focus on one thing at a time
+'''
+def transfer(spreadsheet):
+    wb = openpyxl.load_workbook(spreadsheet)#open spreadsheet
+    ws = wb.get_sheet_by_name('Sheet1')#specify the sheet
+    ws.update_values(ser)#update the values with the serial number
+    
+    x.shutil.move(spreadsheet)
+
+    src = os.path(filename, spreadsheet)
+    dest = os.path(spreadsheet)
+    
+transfer(r'excel.xml')
+
+
+
+
+import os, openpyxl
+import shutil
+def extract(filename):
+    with open(filename, 'r') as file:#open file
+        content = file.read()#read from it
+        ind = content.find('serial')#find serial #
+        x = content.index(ind)#possibly have to find its index to get the actual serial #
+        ser = content[x:64]
+    else:
+        print('no')
+extract(r'eraserreport.pdf.html?')
+
+
+
+with open('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11/fileplay.txt', 'r') as file:#open file
+    content = file.read()
+    if 'S4ELNF2N116556' in content:
+        print('yes')
+    else:
+        print('no')
+
+
+#notes from 64-90 continued: i think i need to install PyPDF2 for this to werk
+#which im not sure i can do on this computer so I will skip that for now and
+#attempt to figure out the other half of this mission, the excel stuff.
+
+
+
+def transfer(spreadsheet):
+    wb = openpyxl.load_workbook(spreadsheet)#open spreadsheet
+    ws = wb.get_sheet_by_name('Sheet1')#specify the sheet
+    ws['J2'] = ser#update the values with the serial number
+    
+    w#s.update_values(ser)#update the values with the serial number
+    
+    x.shutil.move(spreadsheet)
+
+    src = os.path(filename, spreadsheet)
+    dest = os.path(spreadsheet)
+    
+transfer(r'excel.xml')
+
+#I'm thinking that since I'm going to have several pieces of information to add
+#to the spreadsheet such as, eraser SN, HDD SN, model #, and eraser status
+#there are a few ways i could do it
+
+
+#option 1, my method for taking the info and making it easier to disperse into
+#the spreadsheet
+#1, put these items in a dictionary
+#eraser sn-A, hdd sn-B, model#-C, eraser status-D
+#https://htgincorporated-my.sharepoint.com/personal/jpeake_htginc_com/Documents/Desktop/serial.xlsx?web=1
+spreadsheet = open('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11/serial.xlsx', 'r')
+
+
+with open('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11/testdata.txt', 'r') as file:
+    con = file.read()
+    data = {}
+    for line in con.split('\n'):
+        parts = line.split(':')
+        if len(parts)==2:
+            key = parts[0].strip()
+            value = parts[1].strip()
+            data[key] = value
+    ws['A2']==data[1]
+            
+    #print(data)
+    #file.close()
+
+#2, I think I can move the data I extract directly into where it needs to go.
+#
+import csv
+with open('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11/testdata.txt', 'r') as file:
+    stuff = file.read()
+    #x = stuff.split()
+    #for i in x:
+        
+    
+
+
+#I have successfully taken data in a notepad and put it into an easy to read
+#dictionary type format.
+#how could i make my code differentiate an 'eraser sn' string from its sn?
+#when I am finally able to decipher the information i need out of the pdf file
+#if it is shown in the form it looks like where it states 'model:', 'serial:'etc
+#that would be easy because then I could just use option 1
+
+#just looked some stuff up, i think i can use the csv module to read and edit the
+#the spreadsheet
+
+
+
+#first csv thingy
+attempt = csv.reader(stuff, delimiter=' ', quotechar =' ')
+print(attempt)
+file.close()
+#wb = xlrd.open_workbook('myfile.xlsx')
+
+
+
+#9/28 4:10pm today I achieved some decent progress I think:
+#figured out the issue yesterday of opening and reading from the file, it is
+#a new problem of encoding. I don't know of any other way to operate on the
+#pdf file than to read it in binary, decode the binary to readable text and find
+#the things im looking for.
+#I figured out that thats what i need to do i think and began the code for
+#decoding the file. it is mostly on lines 32-58 of the serial file.
+#the issue I am running into there is it says that there is a non-hexadecimal
+#digit somewhere in the file. since it cannot be decoded, it raises an error
+#to combat this I think I could use a Try Except branch and maybe just kinda
+#skip it
+#or add an if statement that says something like 'if non-hexadecimal'(as of now
+#i have no idea how i might check if something is hexadecimal or not but there
+#is probably a way) return the non-hexadecimal value. or skip it or but it in
+#a list or something idk anything to make the program continue to the end of the
+#file. also i did see some packages I could install to make that work
+#I think thats where I'm at with that part of the project, trying to decode the
+#pdf. well i've just installed the pypdf2 thingy lol so i really hope that will
+#solve the problem of deciphering the doc
+#I still think theres a chance I've been going about this totally wrong and
+#perhaps I don't need to read/see into the file to find what im looking for
+
+#on the other end, once the information is deciphered this part of the program
+#needs to take the data and put it into its correct place on the spreadsheet
+#to make this happen I just learned about the csv module that is already built
+#into python and as of now I think it will do what i need it to do.
+#the code that doesn't require csv module is almost complete
+
+#putting it all together, I began the making a decoder for the pdf file
+#once decoded i can find the information im looking for and assuming the format
+#stays the same, the coder will be obsolete and i can write a function to find
+#the information where ik its gonna be
+#I have prepared code for once the information is deciphered and how the program
+#will enter it into the spreadsheet, using the csv module.
+#as well as the code that actuall transfers the data from the file (or notepad)
+#to the spreadsheet, using the shutil module that i used for fileskedaddler
+
+#on the 29th, I will start figuring out how to use pypdf2 and hopefully
+#decode this basterd.
+#and then I will figure out how to take the info and put it where its supposed
+#to go in the spreadsheet.
+
+
+
+########################################################################################################################
+'''
+import re
+#import os
+#os.chmod('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11', 0o755)
+with open('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11/fileplay.txt', 'rb') as file:#open file
+    content = file.read(100)#read from file
+    while content:
+        print(content)
+        content = file.read(3)
+    #content = content.decode('utf-8')
+    print(content)
+#hex_string = content #hexadecimal representation# 
+#decoded_text = hex_string.decode('utf-8', errors='ignore')
+#hex_pattern = r'[0-9a-fA-F]+'
+
+#hex_matches = re.findall(r'[0-9a-fA-F]+', decoded_text)
+
+#hex_parts = hex_string.strip('%').split('\n')
+
+#decoded_bytes = bytes.fromhex(''.join(hex_matches))
+
+file.close()
+#print(decoded_bytes)
+
+
+with open('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11/fileplay.txt', 'r', encoding='u) as file:#open file
+    content = file.read(100)#read from file
+
+'''
+    while content:
+clean_hex_string = ''.join(hex_matches)
+
+hex_parts = hex_string.strip('%').split('\n')# removing leading '%' and split by '\n'
+print(hex_parts)
+decoded_parts = [bytes.fromhex(part).decode('utf-8') for part in hex_parts]#convert each hex part to bytes and decode as utf-8
+decoded_pdf = ''.join(decoded_parts)#join the decoded parts into a single string
+
+print(decoded_pdf)
+file.close()
+#as of now at 9/28 10:37, I'm still trying to get into the file, I have determined that it is not an access issue but a
+#encoding issue, so now I need to figure out the encoding of these files so that I can read out the file in binary
+#and then decode it using whatever it is encoded in, and then it should read out in plain text
+#I'm also considering the possiblity that I don't need to read it out in plain text, as long as I know where the things
+#i'm looking for are supposed to be, I can get the information i need
+#but idek where the friggin stuff is.
+
+#another thought I just had is maybe I don't need to read from the file at all, I could try to just do the operation
+#but once again, I would need to know exacly where the stuff is.
+
+#I've made another breakthrough, I opened the file in 'rb' (read binary mode) I got the encoded version of the
+#file into a notepad. it is now with the python program files so it can be operated and read from.
+#this is not very practical for the purposes of this project though because the program would somehow have to take every
+#erasure report and convert it into a note pad and then from notepad decode the text to find serial number.
+#although another idea i just had is if I can decode this from notepad and have the coded and decoded version and decipher
+#where the information i need can be found, since it is in the same format every time, I could write a function
+
+
+
+#to just take from that location every time.
+#it is now 1:04pm, i have found that the coded file is in hexadecimal, so im trying to decode hexadecimal to human
+#readable text. i rlly hope im not moving in the wrong direction.
+#there is a non-hexadecimal number somewhere in the file im trying to figure out rn
+#I'm kinda stuck on this part of the project and unsure what to do so for productivies sake im gonna go back to the
+#excel portion.
+
+#I think that the file is in utf-8 but it cant decode past the first 46 bytes.
+#other way I could take information from this pdf file
+    #########################################################################################################################
+
+
+
+
+
+
+import chardet
+with open(filename, 'rb') as f:
+  result = chardet.detect(f.read())
+  encoding = result['encoding']
+file = open(filename, encoding=encoding)
+content = file.read(50)
+
+
+
+
+
+
+#I am able to open and read from the text file 'fileplay.txt' that are at these
+#coordinates: C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11/fileplay.txt
+#this is the same location as the data erasure report, therefore this proves that it is in the correct directory
+#I have also already proven that I should have the right permissions to operate on the file
+#my thought rn is that while I may have the right permssions, python might not.
+import os
+os.chmod('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11/fileplay.txt', 0o755)
+with open('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11/fileplay.txt','r') as file:
+    content = file.read()
+    print(content)
+    file.close()
+
+
+
+#my current problem is that to operate on one of these files, the file
+#and python program files need to be in the same directory.
+#I think I will omit this problem for now and focus on the actual functions
+#involved in the program.
+#I moved the file in with the python stuff and now its saying access denied sooo this might be frigged
+#tried os.chmod and still came up with access denied error.
+#I'm gonna try to pretend this isnt an issue rn and continue on as if it does
+
+
+
+
+#opening the file
+#with open('#A program that retrieves serial numbers from a file and moves it to an excel
+#spreadsheet.
+#type of file
+
+
+#read from a file
+#source_dir = filedialog.askdirectory()
+
+#find the part of the html file that designates the serial number
+#copy that part.
+import requests
+from bs4 import BeautifulSoup
+page = requests.get("https://patents.google.com/patent/EP1208209A1/en?oq=medicinal+chemistry")
+soup = BeautifulSoup(page.content, 'html.parser')
+claim_sect = soup.find_all('section', attrs={"itemprop":"claims"})
+print('This is the raw content: \n') 
+print(str(claim_sect)) 
+print('This is the variable type: \n') 
+print(str(type(claim_sect))) 
+str_sect  =  claim_sect[0]
+
+
+
+
+
+
+import os
+#os.chmod('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11', 0o755)
+with open('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11','r') as file:
+    content = file.read()
+    print(content)
+    file.close()
+
+
+
+#my current problem is that to operate on one of these files, the file
+#and python program files need to be in the same directory.
+#I think I will omit this problem for now and focus on the actual functions
+#involved in the program.
+#I moved the file in with the python stuff and now its saying access denied sooo this might be frigged
+#tried os.chmod and still came up with access denied error.
+#I'm gonna try to pretend this isnt an issue rn and continue on as if it does
+
+
+
+
+#opening the file
+with open('https://htgincorporated.sharepoint.com/:b:/r/sites/AssetLogistics/Shared%20Documents/Processing/PC-Doctor%20Test%20Logs/2023/MHYN9K1%20-%20Jermaine/drive_erase/erase_reports/2023-09-25T14-59-14_erase_result_1500_1_en.pdf?csf=1&web=1&e=kfm9Xy', 'r') as file:
+    content = file.read()
+    print(content)
+    serial = '12345'
+    if serial in content:
+        x = content.index(serial)
+        print(content[x:64])
+    else:
+        print('no')
+
+import os
+print(os.stat('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11'))
+
+#', 'r') as file:
+content = file.read()
+#finding the serial
+if serial in content:
+    x = content.index(serial)
+    print(content[x:64])
+
+import os
+print(os.stat('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11'))
+
+
+#A program that retrieves serial numbers from a file and moves it to an excel
+#spreadsheet.
+#type of file
+
+
+#read from a file
+#source_dir = filedialog.askdirectory()
+
+#find the part of the html file that designates the serial number
+#copy that part.
+import requests
+from bs4 import BeautifulSoup
+page = requests.get("https://patents.google.com/patent/EP1208209A1/en?oq=medicinal+chemistry")
+soup = BeautifulSoup(page.content, 'html.parser')
+claim_sect = soup.find_all('section', attrs={"itemprop":"claims"})
+print('This is the raw content: \n') 
+print(str(claim_sect)) 
+print('This is the variable type: \n') 
+print(str(type(claim_sect))) 
+str_sect  =  claim_sect[0]
+
+
+
+
+
+
+import os
+os.chmod('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11', 0o755)
+with open('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11','r') as file:
+    content = file.read()
+    print(content)
+    file.close()
+
+
+
+#my current problem is that to operate on one of these files, the file
+#and python program files need to be in the same directory.
+#I think I will omit this problem for now and focus on the actual functions
+#involved in the program.
+#I moved the file in with the python stuff and now its saying access denied sooo this might be frigged
+#tried os.chmod and still came up with access denied error.
+#I'm gonna try to pretend this isnt an issue rn and continue on as if it does
+
+
+
+
+#opening the file
+with open('https://htgincorporated.sharepoint.com/:b:/r/sites/AssetLogistics/Shared%20Documents/Processing/PC-Doctor%20Test%20Logs/2023/MHYN9K1%20-%20Jermaine/drive_erase/erase_reports/2023-09-25T14-59-14_erase_result_1500_1_en.pdf?csf=1&web=1&e=kfm9Xy', 'r') as file:
+    content = file.read()
+    print(content)
+    serial = '12345'
+    if serial in content:
+        x = content.index(serial)
+        print(content[x:64])
+    else:
+        print('no')
+
+with open('C:/Users/JPeake/OneDrive - HTG Inc/Desktop/erase_reports','r') as file:
+    content = file.read()
+    print(content)
+
+
+
+
+#I verified that a specific word 
+###################################################################################
+import os, openpyxl
+import shutil
+
+def extract(filename):
+    with open(filename, 'r') as file:#open file
+        content = file.read()#read from it
+        ind = content.find('serial')#find serial #
+        x = content.index(ind)#possibly have to find its index to get the actual serial #
+        ser = content[x:64]
+        
+extract(r'eraserreport.pdf.html?')
+
+#now o move it into an excel spreadsheet
+###actually I think ser would be the serial
+#x would contain the actual serial number
+#I should keep in mind that I need to find more than just a serial number but for now im
+#tryna focus on one thing at a time
+
+def transfer(spreadsheet):
+    wb = openpyxl.load_workbook(spreadsheet)#open spreadsheet
+    ws = wb.get_sheet_by_name('Sheet1')#specify the sheet
+    ws.update_values(ser)#update the values with the serial number
+    
+    x.shutil.move(spreadsheet)
+
+    src = os.path(filename, spreadsheet)
+    dest = os.path(spreadsheet)
+    
+transfer(r'excel.xml')
+
