@@ -57,3 +57,18 @@ update_spreadsheet(pdf_path, spreadsheet_path, row_number)
 #Enter the row number in the spreadsheet: 13
 
 #nope it still does not work in other directories
+
+C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1>python serial3.py C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\2023-09-25T14-59-14_erase_result_1500_1_en.pdf C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\serial.xlsx 10
+Enter the path to the PDF file: C:\Users\JPeake\OneDrive - HTG Inc\Desktop\erase_reports\2023-09-25T14-59-14_erase_result_1500_1_en.pdf
+Enter the row number in the spreadsheet: 8
+Traceback (most recent call last):
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\serial3.py", line 70, in <module>
+    update_spreadsheet(pdf_file_path, spreadsheet_path, row_number)
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\serial3.py", line 50, in update_spreadsheet
+    sn, mod, pcsn, stat = extract_information(pdf_path)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\serial3.py", line 27, in extract_information
+    with open(pdf_path, 'rb') as file:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\JPeake\\OneDrive - HTG Inc\\Desktop\\erase_reports\\2023-09-25T14-59-14_erase_result_1500_1_en.pdf'
+
