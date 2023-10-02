@@ -635,3 +635,55 @@ def transfer(spreadsheet):
     
 transfer(r'excel.xml')
 
+
+
+
+
+
+
+
+import PyPDF2,openpyxl
+
+with open('C:/Users/JPeake/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Python 3.11/2023-09-25T14-59-14_erase_result_1500_1_en.pdf', 'rb') as file:#open pdf
+    pdf_reader = PyPDF2.PdfReader(file)#pdfreader decodes it
+    extracted_text = '' 
+
+    for pgnum in range(len(pdf_reader.pages)):
+        pg = pdf_reader.pages[pgnum]
+        extracted_text += pg.extract_text()#put the text into an empty string
+        
+#ind = extracted_text.find('serial')#find serial #
+x = extracted_text.index('Serial')#find the index of the first serial number
+sn = extracted_text[x:x+24]
+
+y = extracted_text.index('Model')#index of the first model number
+mod = extracted_text[y:y+24]
+
+pcsn = extracted_text[704:713]#location of the pc sn
+
+z = extracted_text.index('Status')
+stat = extracted_text[595:611]#location of the status
+        
+    
+#print(sn,mod,'\n',pcsn,stat)
+
+def transfer(spreadsheet):
+    wb = openpyxl.load_workbook(spreadsheet)#open spreadsheet
+    ws = wb['Sheet1']#specify the sheet
+    cell_value = ws['A2'].value#update the values with the serial number
+    info = [sn,mod,pcsn,stat]#put the stuff inna list
+    for i in info:
+        if i == 
+    
+    ws['A2'].value = sn
+    ws['B2'].value = pcsn
+    ws['C2'].value = mod
+    ws['D2'].value = stat
+    x.shutil.move(spreadsheet)
+
+    
+    wb.save(r'C:\Users\JPeake\AppData\Local\Programs\Python\Python311\serial.xlsx')#update the values with the serial number
+
+transfer(r'C:\Users\JPeake\AppData\Local\Programs\Python\Python311\serial.xlsx')
+
+file.close() 
