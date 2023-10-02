@@ -1,0 +1,59 @@
+import PyPDF2,openpyxl,sys
+
+def extract_information(pdf_path):
+    with open(pdf_path, 'rb') as file:
+        pdf_reader = PyPDF2.PdfReader(file)
+        extracted_text = ''
+
+        for pgnum in range(len(pdf_reader.pages)):
+            pg = pdf_reader.pages[pgnum]
+            extracted_text += pg.extract_text()
+
+        x = extracted_text.index('Serial')
+        sn = extracted_text[x+8:x + 24]
+
+        y = extracted_text.index('Model')
+        mod = extracted_text[y+7:y + 24]
+
+        pc = extracted_text.index('UUID')
+        pcsn = extracted_text[pc-10:pc]
+
+        z = extracted_text.index('System')
+        stat = extracted_text[z-18:z-1]
+
+    return sn, mod, pcsn, stat
+
+def update_spreadsheet(pdf_path, spreadsheet, row):
+    sn, mod, pcsn, stat = extract_information(pdf_path)
+
+    wb = openpyxl.load_workbook(spreadsheet)
+    ws = wb['Sheet1']
+
+    info = [sn, pcsn, mod, stat]
+    columns = ['A', 'B', 'C', 'D']
+
+    for col, value in zip(columns, info):
+        cell = f"{col}{row}"
+        ws[cell].value = value
+
+    wb.save(spreadsheet)
+
+if __name__=='__main__':
+    if len(sys.argv) !=4:
+        print('usage: serial3.py C:/Users/JPeake/OneDrive - HTG Inc/Desktop/test1/MHYN9K10A__na/drive_erase/erase_reports/2023-09-25T10-37-43_erase_result_1556_1_en.pdf C:/Users/JPeake/OneDrive - HTG Inc/Desktop/test1/serial.xlsx 5')
+        sys.exit(1)
+
+    pdf_path = sys.argv[1]
+    spreadsheet_path = sys.argv[2]
+    row_number = int(sys.argv[3])
+
+update_spreadsheet(pdf_path, spreadsheet_path, row_number)
+
+
+#I think because my files are all over the place I'm going to try to organize them.
+#it basically works
+#C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1>python serial3.py C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\2023-09-25T14-59-14_erase_result_1500_1_en.pdf C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\serial.xlsx 10
+#Enter the path to the PDF file: C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\MHYN9K106__na\drive_erase\erase_reports\2023-09-25T15-11-11_erase_result_1133_1_en.pdf
+#Enter the row number in the spreadsheet: 13
+
+#nope it still does not work in other directories
