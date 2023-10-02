@@ -731,3 +731,51 @@ def transfer(spreadsheet):
 transfer(r'C:\Users\JPeake\AppData\Local\Programs\Python\Python311\serial.xlsx')
 
 file.close()
+#################################################################################################################################################
+import PyPDF2
+import openpyxl
+
+def extract_information(pdf_path):
+    with open(pdf_path, 'rb') as file:
+        pdf_reader = PyPDF2.PdfReader(file)
+        extracted_text = ''
+
+        for pgnum in range(len(pdf_reader.pages)):
+            pg = pdf_reader.pages[pgnum]
+            extracted_text += pg.extract_text()
+
+        x = extracted_text.index('Serial')
+        sn = extracted_text[x:x + 24]
+
+        y = extracted_text.index('Model')
+        mod = extracted_text[y:y + 24]
+
+        pcsn = extracted_text[704:713]
+
+        z = extracted_text.index('Status')
+        stat = extracted_text[595:611]
+
+    return sn, mod, pcsn, stat
+
+def update_spreadsheet(pdf_path, spreadsheet, row):
+    sn, mod, pcsn, stat = extract_information(pdf_path)
+
+    wb = openpyxl.load_workbook(spreadsheet)
+    ws = wb['Sheet1']
+
+    info = [sn, pcsn, mod, stat]
+    columns = ['A', 'B', 'C', 'D']
+
+    for col, value in zip(columns, info):
+        cell = f"{col}{row}"
+        ws[cell].value = value
+
+    wb.save(spreadsheet)
+
+# Example usage
+pdf_file_path = input("Enter the path to the PDF file: ")
+row_number = int(input("Enter the row number in the spreadsheet: "))
+
+spreadsheet_path = r'C:\Users\JPeake\AppData\Local\Programs\Python\Python311\serial.xlsx'
+
+update_spreadsheet(pdf_file_path, spreadsheet_path, row_number)
