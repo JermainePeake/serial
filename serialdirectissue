@@ -86,3 +86,12 @@ for root, dirs, files in os.walk("/path/to/directory"):
 #root is the current directory
 #dirs is a list of the subdirectories of the current directory
 #files is a list of the files in the current directory
+
+
+#looping through all files in a directory:
+import os
+your_folder = C:\sample_file #target folder
+list_of_files = os.listdir(your_folder) #list of files
+for file_name in list_of_files:
+    if '.pdf' in file_name:
+        print(file_name)
