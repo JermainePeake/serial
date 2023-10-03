@@ -27,3 +27,28 @@ def extract_information(pdf_path):
         pcsn = pcsn_match.group(1) if pcsn_match else None
         stat = stat_match.group(1) if stat_match else None
     return sn, mod, pcsn, stat
+
+
+
+
+
+
+
+
+
+ serial_pattern = re.compile(r'Serial\s*:\s*(\S+)')
+        mod_pattern = re.compile(r'Model\s*:\s*(\S+)')
+        pcsn_pattern = re.compile(r'Serial(?:[^S]*Serial(?:[^S]*Serial\s*(\S+))?')
+        stat_pattern = re.compile(r'Status(?:[^S]*Status(?:[^S]*Status\s*(\S+))?')
+
+        sn_match = serial_pattern.search(extracted_text)
+        mod_match = mod_pattern.search(extracted_text)
+        pcsn_match = pcsn_pattern.search(extracted_text)
+        stat_match = stat_pattern.search(extracted_text)
+
+        sn = sn_match.group(1) if sn_match else None
+        mod = mod_match.group(1) if mod_match else None
+        pcsn = pcsn_match.group(2) if pcsn_match else None
+        stat = stat_match.group(2) if stat_match else None
+    print(sn,mod,pcsn,stat)
+    return sn, mod, pcsn, stat
