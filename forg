@@ -52,3 +52,39 @@ def extract_information(pdf_path):
         stat = stat_match.group(2) if stat_match else None
     print(sn,mod,pcsn,stat)
     return sn, mod, pcsn, stat
+
+
+
+
+
+
+
+
+import re
+
+def extract_information(pdf_path):
+    with open(pdf_path, 'rb') as file:
+        pdf_reader = PyPDF2.PdfReader(file)
+        extracted_text = ''
+
+        for pgnum in range(len(pdf_reader.pages)):
+            pg = pdf_reader.pages[pgnum]
+            extracted_text += pg.extract_text()
+
+        serial_pattern = re.compile(r'Serial\s*:\s*(\S+)', re.IGNORECASE)
+        mod_pattern = re.compile(r'Model\s*:\s*(\S+)', re.IGNORECASE)
+        pcsn_pattern = re.compile(r'Serial(?:[^S]*Serial\s*:\s*(\S+))?')
+        stat_pattern = re.compile(r'Status(?:[^S]*Status\s*:\s*(\S+))?')
+
+        sn_match = serial_pattern.search(extracted_text)
+        mod_match = mod_pattern.search(extracted_text)
+        pcsn_match = pcsn_pattern.search(extracted_text)
+        stat_match = stat_pattern.search(extracted_text)
+
+        sn = sn_match.group(1) if sn_match else None
+        mod = mod_match.group(1) if mod_match else None
+        pcsn = pcsn_match.group(1) if pcsn_match else None
+        stat = stat_match.group(1) if stat_match else None
+
+    print(sn, mod, pcsn, stat)
+    return sn, mod, pcsn, stat
