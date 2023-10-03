@@ -95,3 +95,34 @@ list_of_files = os.listdir(your_folder) #list of files
 for file_name in list_of_files:
     if '.pdf' in file_name:
         print(file_name)
+
+
+
+
+
+Traceback (most recent call last):
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\ser4.py", line 9, in <module>
+    import PyPDF2,openpyxl,sys,os
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\openpyxl\__init__.py", line 7, in <module>
+    from openpyxl.workbook import Workbook
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\openpyxl\workbook\__init__.py", line 4, in <module>
+    from .workbook import Workbook
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\openpyxl\workbook\workbook.py", line 7, in <module>
+    from openpyxl.worksheet.worksheet import Worksheet
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\openpyxl\worksheet\worksheet.py", line 25, in <module>
+    from openpyxl.cell import Cell, MergedCell
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\openpyxl\cell\__init__.py", line 3, in <module>
+    from .cell import Cell, WriteOnlyCell, MergedCell
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\openpyxl\cell\cell.py", line 26, in <module>
+    from openpyxl.styles import numbers, is_date_format
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\openpyxl\styles\__init__.py", line 4, in <module>
+    from .alignment import Alignment
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\openpyxl\styles\alignment.py", line 5, in <module>
+    from openpyxl.descriptors import Bool, MinMax, Min, Alias, NoneSet
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\openpyxl\descriptors\__init__.py", line 4, in <module>
+    from .sequence import Sequence
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\openpyxl\descriptors\sequence.py", line 4, in <module>
+    from openpyxl.xml.functions import Element
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\test1\openpyxl\xml\functions.py", line 36, in <module>
+    from et_xmlfile import xmlfile
+ModuleNotFoundError: No module named 'et_xmlfile'
