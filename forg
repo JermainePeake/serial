@@ -142,3 +142,62 @@ serial_pattern = re.compile(r'Serial\s*:\s*(\S+)', re.IGNORECASE)
         stat = stat_match.group(2) if stat_match else None
     print(sn,mod,pcsn,stat)
     return sn, mod, pcsn, stat
+
+
+#this is the output, and remember the code I wrote is
+#print(sn, mod, pcsn, stat). sn is correct, mod is basically correct don't worry about that rn
+#pcsn is the first Serial, not the second (you can tell because it is a duplicate of sn)
+#stat is also using its first occurence of 'Status:' string
+S41GNA0M403704 SAMSUNG S41GNA0M403704 good
+S4ELNF2N116556 SAMSUNG S4ELNF2N116556 good
+
+# the following is not the output
+#it is the file being read from
+#you can see in the following text that there are 2 occurrences of Status:, I want the second one
+Serial
+:
+S4ELNF2N116556
+Size
+:
+512.1	GB
+Bus
+:
+NVMe
+Sectors
+:
+1000233648	(512	byte	sector)
+HPA:
+Doesn't	Exist
+DCO:
+Doesn't	Exist
+Remapped	Sectors
+:
+0
+Health	Status
+:
+good
+Remapped	Sectors	After	Erasure
+:
+0
+Start/End	Time
+:
+2023-09-25	14:56:18+0000	
+/	
+2023-09-25	14:59:12+0000
+Duration
+:
+00:00:02:54	(DD:HH:MM:SS)
+Method
+:
+NIST	800-88	Clear	(NVMe	Sanitize	Crypto	Erase)
+Verification	Method
+:
+Quick	Sampling
+Erasure	Rounds
+:
+1	(1	
+firmware
+)
+Status
+:
+Erased
