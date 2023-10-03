@@ -145,3 +145,91 @@ row_number = int(input("Enter the row number in the spreadsheet: "))
 spreadsheet_path = r'C:\Users\JPeake\AppData\Local\Programs\Python\Python311\Scripts\test1\serial.xlsx'
 
 update_spreadsheet(pdf_file_path, spreadsheet_path, row_number)
+#################################################### UPDATED VERSION, WILL PROBABLY DELETE AND REPLACE THE STUFF ABOVE s5 #########
+import PyPDF2
+import openpyxl
+import os
+
+def extract_information(pdf_path):
+    with open(pdf_path, 'rb') as file:
+        pdf_reader = PyPDF2.PdfReader(file)
+        extracted_text = ''
+
+        for pgnum in range(len(pdf_reader.pages)):
+            pg = pdf_reader.pages[pgnum]
+            extracted_text += pg.extract_text()
+
+        x = extracted_text.index('Serial')
+        sn = extracted_text[x+8:x + 24]
+
+        y = extracted_text.index('Model')
+        mod = extracted_text[y+7:y + 24]
+
+        pc = extracted_text.index('UUID')
+        pcsn = extracted_text[pc-10:pc]
+
+        z = extracted_text.index('System')
+        stat = extracted_text[z-19:z-1]
+
+    return sn, mod, pcsn, stat
+
+def update_spreadsheet(pdf_path, spreadsheet, row):
+    sn, mod, pcsn, stat = extract_information(pdf_path)
+
+    wb = openpyxl.load_workbook(spreadsheet)
+    ws = wb['Sheet1']
+
+    info = [sn, pcsn, mod, stat]
+    columns = ['A', 'B', 'C', 'D']
+
+    for col, value in zip(columns, info):
+        cell = f"{col}{row}"
+        ws[cell].value = value
+
+    wb.save(spreadsheet)
+
+# Example usage
+spreadsheet_path = r'C:\Users\JPeake\AppData\Local\Programs\Python\Python311\Scripts\test1\serial.xlsx'
+pdf_file_path = input("Enter the path to the PDF file: ")
+row_number = int(input("Enter the row number in the spreadsheet: "))
+for root, dirs, files in os.walk(pdf_file_path):
+    for file in files:
+        if file.endswith('.pdf'):
+            pdf_file_path = os.path.join(root,file)
+            
+
+            update_spreadsheet(pdf_file_path, spreadsheet_path, row_number)
+            row_number += 1
+
+
+
+#this update of the file I am working on getting the program to process multiple
+#files
+#the directory issue is still a thing
+#my only idea for that issue as of now is ask if we can just put all of the
+#erasure reports into one folder, but that might be problematic bc I assume
+#they want to keep those with the rest of they're corresponding files.
+
+
+
+#it works
+#all you have to do is input the directory along with the row number to start on
+#I still think I should code a check that will determine what row to start on
+#I have verified that I think this works in other directories, big W
+            
+#let me list the things i still need to do:
+            
+#make that check that determines what row to start on
+            
+#I feel like there could be a better way to extract the information that would
+#get exactly what I need, because as of now if there were a drastic change to
+#the file (larger sn than normal or something) it would get more or less of
+#the information
+
+#also maybe turn the bottom part into a funciton, i think it looks kinda messy
+#as is.
+
+#finally, I think I should try to turn it into an executable file.
+
+#although I do think I need to play around with it some more because its still
+#showing duplicates
