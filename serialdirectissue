@@ -72,3 +72,17 @@ Traceback (most recent call last):
          ^^^^^^^^^^^^^^^^^^^^
 FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\JPeake\\OneDrive - HTG Inc\\Desktop\\erase_reports\\2023-09-25T14-59-14_erase_result_1500_1_en.pdf'
 
+
+
+
+
+
+
+import os
+for root, dirs, files in os.walk("/path/to/directory"):
+  for file in files:
+    # do something with file
+#/path/to/directory is the path to the directory you want to start walking from
+#root is the current directory
+#dirs is a list of the subdirectories of the current directory
+#files is a list of the files in the current directory
