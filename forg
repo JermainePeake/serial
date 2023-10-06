@@ -235,3 +235,25 @@ def extract_information(pdf_path):
 
     print(sn, mod, pcsn, stat)
     return sn, mod, pcsn, stat
+
+
+
+
+
+
+
+mod_pattern = re.compile(r'Model\s*:\s*([\s\S]+?)\b', re.IGNORECASE)
+
+# ...
+
+mod_match = mod_pattern.search(extracted_text)
+
+if mod_match:
+    model_line = file.readline().strip()
+    model_info = mod_match.group(1)
+    
+    # Assuming the desired information is after the colon and space
+    model = model_line.split(': ')[1]
+    print(model)
+else:
+    print("Model information not found.")
