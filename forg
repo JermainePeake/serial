@@ -257,3 +257,26 @@ if mod_match:
     print(model)
 else:
     print("Model information not found.")
+
+
+
+
+
+
+
+Traceback (most recent call last):
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\pythonthings\s7.py", line 112, in <module>
+    update_spreadsheet(pdf_file_path, spreadsheet_path, row_number)
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\pythonthings\s7.py", line 89, in update_spreadsheet
+    wb = openpyxl.load_workbook(spreadsheet)
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\pythonthings\openpyxl\reader\excel.py", line 344, in load_workbook
+    reader = ExcelReader(filename, read_only, keep_vba,
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\pythonthings\openpyxl\reader\excel.py", line 123, in __init__
+    self.archive = _validate_archive(fn)
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\pythonthings\openpyxl\reader\excel.py", line 95, in _validate_archive
+    archive = ZipFile(filename, 'r')
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.1776.0_x64__qbz5n2kfra8p0\Lib\zipfile.py", line 1302, in __init__
+    self._RealGetContents()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.1776.0_x64__qbz5n2kfra8p0\Lib\zipfile.py", line 1369, in _RealGetContents
+    raise BadZipFile("File is not a zip file")
+zipfile.BadZipFile: File is not a zip file
