@@ -315,3 +315,38 @@ Traceback (most recent call last):
   File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\pythonthings\openpyxl\workbook\workbook.py", line 287, in __getitem__
     raise KeyError("Worksheet {0} does not exist.".format(key))
 KeyError: 'Worksheet Sheet1 does not exist.'
+
+
+
+
+
+
+
+
+import re
+
+string = '''dksjflks lksdjf kldk sskfj
+Model: Samsung MZVLB256HAHQ-
+000L7
+kds kljdlk kdk lsdk ksdl fsdd'''
+
+string_pat = re.compile(r'Model\s*:\s*([^\n]+)', re.DOTALL)
+string_match = string_pat.search(string)
+model_info = string_match.group(1) if string_match else None
+#print(model_info)
+
+#pattern = re.compile(fr'{model_info}\s*:\s*([^\n]+)', re.DOTALL)
+
+pattern = re.compile(fr'Model:\s*([^\n]*\n[^\n]*)', re.DOTALL)
+
+
+match = pattern.search(string)
+
+info = match.group(1).strip() if match else None
+
+print(info)
+#In this example, fr'{model_info}\s*:\s*([^\n]+)' is an f-string where
+#{model_info} is replaced by the value of the model_info variable.
+#This allows you to dynamically change the pattern basedon the variable's value.
+########################################################################################
+'''
