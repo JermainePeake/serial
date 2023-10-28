@@ -297,3 +297,21 @@ Warning (from warnings module):
     warn(msg)
 UserWarning: File contains an invalid specification for 0. This will be removed
 []
+
+
+
+
+
+
+Warning (from warnings module):
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\pythonthings\openpyxl\reader\workbook.py", line 84
+    warn(msg)
+UserWarning: File contains an invalid specification for 0. This will be removed
+Traceback (most recent call last):
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\pythonthings\s8.py", line 94, in <module>
+    update_spreadsheet(pdf_file_path, spreadsheet_path, row_number)     #4th if the files is a pdf, take it to the update spreadsheet function (I have had the idea that it should go to the extraction function first)
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\pythonthings\s8.py", line 72, in update_spreadsheet
+    ws = wb['Sheet1']
+  File "C:\Users\JPeake\OneDrive - HTG Inc\Desktop\pythonthings\openpyxl\workbook\workbook.py", line 287, in __getitem__
+    raise KeyError("Worksheet {0} does not exist.".format(key))
+KeyError: 'Worksheet Sheet1 does not exist.'
