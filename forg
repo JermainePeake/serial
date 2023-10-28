@@ -350,3 +350,40 @@ print(info)
 #This allows you to dynamically change the pattern basedon the variable's value.
 ########################################################################################
 '''
+
+
+
+
+
+
+
+import PyPDF2
+import re
+
+def extract_information(pdf_path):
+    with open(pdf_path, 'rb') as file:
+        pdf_reader = PyPDF2.PdfReader(file)
+        extracted_text = ''
+
+        for pgnum in range(len(pdf_reader.pages)):
+            pg = pdf_reader.pages[pgnum]
+            extracted_text += pg.extract_text()
+
+        serial_pattern = re.compile(r'Serial\s*:\s*(\S+)', re.IGNORECASE)
+        model_pattern = re.compile(r'Model\s*:\s*([^\n]*\n[^\n]*)', re.DOTALL)
+        pcsn_pattern = re.compile(r'Serial.*?\s*:\s*(\S+).*?Serial\s*:\s*(\S+)', re.IGNORECASE)
+        stat_pattern = re.compile(r'Status.*?\s*:\s*(\S+).*?Status\s*:\s*(\S+)', re.IGNORECASE)
+
+        sn_match = serial_pattern.search(extracted_text)
+        model_match = model_pattern.search(extracted_text)
+        pcsn_match = pcsn_pattern.search(extracted_text)
+        stat_match = stat_pattern.search(extracted_text)
+
+        sn = sn_match.group(1) if sn_match else None
+        model_info = model_match.group(1).strip() if model_match else None
+        pcsn = pcsn_match.group(1) if pcsn_match else None
+        stat = stat_match.group(1) if stat_match else None
+
+    return sn, model_info, pcsn, stat
+
+
