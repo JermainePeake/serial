@@ -287,3 +287,13 @@ zipfile.BadZipFile: File is not a zip file
 for root, dirs, files in os.walk(pdf_file_path):
     for file in files:
         if file.endswith('.pdf):
+
+
+
+
+
+Warning (from warnings module):
+  File "C:\Users/JPeake/OneDrive - HTG Inc/Desktop/pythonthings\openpyxl\reader\workbook.py", line 84
+    warn(msg)
+UserWarning: File contains an invalid specification for 0. This will be removed
+[]
