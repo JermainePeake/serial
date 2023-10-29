@@ -446,3 +446,61 @@ for root, dirs, files in os.walk(pdf_file_path):    #for root
 
             update_spreadsheet(pdf_file_path, spreadsheet_path, row_number)     #4th if the files is a pdf, take it to the update spreadsheet function (I have had the idea that it should go to the extraction function first)
             row_number += 1
+
+
+
+
+import tkinter as tk
+from tkinter import filedialog
+
+class PDFExtractorGUI:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("PDF Data Extractor")
+
+        self.label1 = tk.Label(master, text="Select PDF Folder:")
+        self.label1.pack()
+
+        self.folder_path = tk.StringVar()
+        self.entry1 = tk.Entry(master, textvariable=self.folder_path, width=50)
+        self.entry1.pack()
+
+        self.browse_button = tk.Button(master, text="Browse", command=self.browse_folder)
+        self.browse_button.pack()
+
+        self.label2 = tk.Label(master, text="Enter Row Number:")
+        self.label2.pack()
+
+        self.row_number = tk.IntVar()
+        self.entry2 = tk.Entry(master, textvariable=self.row_number)
+        self.entry2.pack()
+
+        self.extract_button = tk.Button(master, text="Extract Data", command=self.extract_data)
+        self.extract_button.pack()
+
+    def browse_folder(self):
+        folder_selected = filedialog.askdirectory()
+        self.folder_path.set(folder_selected)
+
+    def extract_data(self):
+        pdf_folder = self.folder_path.get()
+        row_number = self.row_number.get()
+
+        for root, dirs, files in os.walk(pdf_folder):
+            for file in files:
+                if file.endswith('.pdf'):
+                    pdf_file_path = os.path.join(root, file)
+                    update_spreadsheet(pdf_file_path, spreadsheet_path, row_number)
+                    row_number += 1
+
+def extract_information(pdf_path):
+    # Your existing extract_information function
+
+def update_spreadsheet(pdf_path, spreadsheet, row):
+    # Your existing update_spreadsheet function
+
+spreadsheet_path = r'C:\Users\JPeake\OneDrive - HTG Inc\Desktop\pythonthings\Scripts\test1\SERIAL2.xlsx'
+
+root = tk.Tk()
+app = PDFExtractorGUI(root)
+root.mainloop()
