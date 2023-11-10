@@ -504,3 +504,79 @@ spreadsheet_path = r'C:\Users\JPeake\OneDrive - HTG Inc\Desktop\pythonthings\Scr
 root = tk.Tk()
 app = PDFExtractorGUI(root)
 root.mainloop()
+
+
+
+###########################################################spreadsheet path change###################################################################
+import tkinter as tk
+from tkinter import filedialog
+
+class PDFExtractorGUI:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("PDF Data Extractor")
+
+        # PDF Folder Entry
+        self.label1 = tk.Label(master, text="Select PDF Folder:")
+        self.label1.pack()
+
+        self.folder_path = tk.StringVar()
+        self.entry1 = tk.Entry(master, textvariable=self.folder_path, width=50)
+        self.entry1.pack()
+
+        self.browse_button = tk.Button(master, text="Browse", command=self.browse_folder)
+        self.browse_button.pack()
+
+        # Spreadsheet Entry
+        self.label3 = tk.Label(master, text="Enter Spreadsheet Path:")
+        self.label3.pack()
+
+        self.spreadsheet_path = tk.StringVar()
+        self.entry3 = tk.Entry(master, textvariable=self.spreadsheet_path, width=50)
+        self.entry3.pack()
+
+        self.browse_button2 = tk.Button(master, text="Browse", command=self.browse_spreadsheet)
+        self.browse_button2.pack()
+
+        # Row Number Entry
+        self.label2 = tk.Label(master, text="Enter Row Number:")
+        self.label2.pack()
+
+        self.row_number = tk.IntVar()
+        self.entry2 = tk.Entry(master, textvariable=self.row_number)
+        self.entry2.pack()
+
+        # Extract Data Button
+        self.extract_button = tk.Button(master, text="Extract Data", command=self.extract_data)
+        self.extract_button.pack()
+
+    def browse_folder(self):
+        folder_selected = filedialog.askdirectory()
+        self.folder_path.set(folder_selected)
+
+    def browse_spreadsheet(self):
+        file_selected = filedialog.askopenfilename(defaultextension=".xlsx", filetypes=[("Excel Files", "*.xlsx")])
+        self.spreadsheet_path.set(file_selected)
+
+    def extract_data(self):
+        pdf_folder = self.folder_path.get()
+        spreadsheet_path = self.spreadsheet_path.get()
+        row_number = self.row_number.get()
+
+        for root, dirs, files in os.walk(pdf_folder):
+            for file in files:
+                if file.endswith('.pdf'):
+                    pdf_file_path = os.path.join(root, file)
+                    update_spreadsheet(pdf_file_path, spreadsheet_path, row_number)
+                    row_number += 1
+
+def extract_information(pdf_path):
+    # Your existing extract_information function
+
+def update_spreadsheet(pdf_path, spreadsheet, row):
+    # Your existing update_spreadsheet function
+
+root = tk.Tk()
+app = PDFExtractorGUI(root)
+root.mainloop()
+
