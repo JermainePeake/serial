@@ -812,3 +812,10 @@ root.mainloop()
 root = tk.Tk()
 app = PDFExtractorGUI(root)
 root.mainloop()
+
+
+
+
+
+pyinstaller --onefile --hidden-import=os --hidden-import=re --hidden-import=PyPDF2 --hidden-import=tkinter --hidden-import=et_xmlfile --hidden-import=openpyxl s11.py
+pyinstaller s11.spec
